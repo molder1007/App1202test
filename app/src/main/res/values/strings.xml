@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">App1202</string>
+    <string name="btnTakePitcure">Take Picture</string>
+    <string name="btnPickPicture">Pick Picture</string>
+    <string name="btnAddaddress">Add</string>
+    <string name="etAddress">Enter Address</string>
+    <string name="textNoCameraAppsFound">No camera apps found</string>
+    <string name="msg_LocationNameIsEmpty">Location name is empty</string>
+    <string name="msg_LocationNameNotFound">Location name not found</string>
+</resources>

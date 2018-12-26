@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivPicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnTakePicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onTakePictureLargeClick"
+            android:text="@string/btnTakePitcure"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btnPickPicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onPickPictureClick"
+            android:text="@string/btnPickPicture"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/etAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/etAddress"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/btnAddAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSubmitClick"
+            android:text="@string/btnAddaddress" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>
