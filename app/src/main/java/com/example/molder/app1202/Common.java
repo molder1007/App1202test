@@ -1,11 +1,17 @@
 package com.example.molder.app1202;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+
+
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,19 +27,18 @@ public class Common {
         }
         int srcWidth = srcBitmap.getWidth();
         int srcHeight = srcBitmap.getHeight();
-        String text = "source image size = " + srcWidth + "x" + srcHeight;
-        Log.d(TAG, text);
         int longer = Math.max(srcWidth, srcHeight);
 
         if (longer > newSize) {
-            double scale = longer / (double) newSize;
-            int dstWidth = (int) (srcWidth / scale);
-            int dstHeight = (int) (srcHeight / scale);
+            int dstWidth = 100;
+            int dstHeight = 100;
             srcBitmap = Bitmap.createScaledBitmap(srcBitmap, dstWidth, dstHeight, false);
-            System.gc();
-            text = "\nscale = " + scale + "\nscaled image size = " +
-                    srcBitmap.getWidth() + "x" + srcBitmap.getHeight();
-            Log.d(TAG, text);
+//            Resources res = this.getContext().getResources();
+//            Bitmap src = BitmapFactory.decodeResource(res, srcBitmap);
+//            RoundedBitmapDrawable dr =
+//                    RoundedBitmapDrawableFactory.create(res, src);
+//            dr.setCornerRadius(Math.max(src.getWidth(), src.getHeight()) / 2.0f);
+
         }
         return srcBitmap;
     }

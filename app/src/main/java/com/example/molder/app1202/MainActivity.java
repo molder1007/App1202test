@@ -1,6 +1,7 @@
 package com.example.molder.app1202;
 
 import android.Manifest;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Marker marker_taroko;
     private Bitmap headimage;
     private double x,y;
+    private String text;
 
 
     @Override
@@ -84,18 +86,56 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void onTakePictureLargeClick(View view) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
         //打開外部儲存目錄
-        file = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//        file = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//        file = getExternalFilesDir(MediaStore.Images.Media.DATA);
         //建立照片檔案名稱
-        file = new File(file, "picture.jpg");
-        //將照片先存在暫存位置(getPackageName() + ".provider")之後系統會將照片轉移到實體位置儲存(file)
+//        file = new File(MediaStore.Images.Media.DATA,"picture.jpg");
+//        file = new File(file, "picture.jpg");
+        String strImage = Environment.getExternalStorageDirectory().getAbsolutePath()+"/picture.jpg";
+
+         file = new File(strImage);
+//        //將照片先存在暫存位置(getPackageName() + ".provider")之後系統會將照片轉移到實體位置儲存(file)
+//        Uri contentUri = FileProvider.getUriForFile(
+//                this, getPackageName() + ".provider", file);
         Uri contentUri = FileProvider.getUriForFile(
                 this, getPackageName() + ".provider", file);
+//        Uri contentUri = Uri.fromFile(file);
         //照片儲存
         intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
-        //檢查是不是有人支援照相功能,有就開始照相
+
+
+
+
+
+//        String strImage = Environment.getExternalStorageDirectory().getAbsolutePath()+"/mypicture.jpg";
+//        File myImage = new File(strImage);
+//        Uri uriMyImage = Uri.fromFile(myImage);
+//
+//        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+//        intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, uriMyImage);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //檢查是不是有人支援照相功能,有就開始照相
         if (isIntentAvailable(this, intent)) {
             startActivityForResult(intent, REQUEST_TAKE_PICTURE_LARGE);
+//            intent = new Intent(Intent.ACTION_PICK,
+//                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//            startActivityForResult(intent, REQUEST_PICK_PICTURE);
         } else {
             Toast.makeText(this, R.string.textNoCameraAppsFound,
                     Toast.LENGTH_SHORT).show();
@@ -164,6 +204,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onSubmitClick(View view) {
         EditText etLocationName = findViewById(R.id.etAddress);
         String locationName = etLocationName.getText().toString().trim();
+        text = locationName;
         if (locationName.length() > 0) {
             locationNameToMarker(locationName);
         } else {
@@ -211,11 +252,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .target(markerOptions.getPosition()).zoom(15).build();
         map.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition));
-        taroko = new LatLng(24.151287, 121.625537);
+        taroko = new LatLng(x, y);
         marker_taroko = map.addMarker(new MarkerOptions()
                 .position(taroko)
-                .title("dd")
-                .snippet("gg")
+                .title(text)
+                .snippet(text)
                 .icon(BitmapDescriptorFactory.fromBitmap(headimage)));
     }
 
